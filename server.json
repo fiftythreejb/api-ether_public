@@ -1,0 +1,8 @@
+{
+    "name":"ether-api",
+    "web":{
+        "rewrites":{
+            "enable":true
+        }
+    }
+}

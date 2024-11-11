@@ -1,0 +1,54 @@
+################################################################################
+# ColdBox Docker Compose Stack
+# This can be used to quickly run your ColdBox application in a CommandBox based Docker Container.
+#
+# We pull the latest image, you can change this to a specific tag or CFML engine, which we recommend.
+# https://hub.docker.com/repository/docker/ortussolutions/commandbox
+#
+# Database
+# - We give you three databases for you to choose from below: MySQL 8, PostgreSQL, Azure MSSQL
+################################################################################
+volumes:
+  sqldata:
+  sqllog:
+  sqlbackup:
+networks:
+  ether-network:
+
+services:
+  # ColdBox Site
+  ether-cfml-api:
+    container_name: ${APPNAME}
+    image: ortussolutions/commandbox:lucee5
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+      - ./db/.env
+    depends_on:
+      - ether-sql-server
+    networks:
+      - ether-network
+    ports:
+      - "8080:8080"
+      - "8443:8443"
+    # Data & Overrides
+    volumes:
+      - ./:/app
+  ether-sql-server:
+    container_name: ether-sql-server
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    user: root
+    build: ./db
+    env_file:
+      - .env
+    networks:
+      - ether-network
+    ports:
+      - "1433:1433"
+    volumes: 
+      - sqldata:/var/opt/mssql/data
+      - sqllog:/var/opt/mssql/log
+      - sqlbackup:/var/opt/sqlserver/backup
+    
