@@ -173,16 +173,6 @@ This will hold our object data and house methods for manipulating or transformin
 
 - getting primary key
 
-- get memento
-
-- get memento as json
-
-- populate bean from data struct
-
-- get meta data
-
-- hashing and getting primary key
-
 #### Dao
 
 This is our data layer. An interface for a data source table or set of API endpoints. This will make our SQL calls or calls to external API endpoints and format the data for our service to serve to our handler endpoint.

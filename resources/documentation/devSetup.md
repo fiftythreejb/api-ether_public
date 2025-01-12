@@ -86,7 +86,7 @@ You can hit any unsecured GET endpoint by navigating to its route. `http://local
 For secured endpoints you will need to run the login endpoint and pass in the auth-token.
 
 1. Run the login endpoint (as a POST request) and pass URL variables for userName and Password
-    1. `localhost:{portNumber}/api/login?_method=post&username=user@domain.com&password=myPasswordIsWeak`
+    1. `localhost:{portNumber}/api/login?_method=post&username=admin@coldbox.org&password=myPasswordIsWeak`
     2. copy the `access_token` from the data structure
     3. You will pass in the token as a URL variable with your supplemental requests `http://`localhost:{portNumber}/api/whoami?x-auth-token=eyJ0eXAiOiJKV1QiL...`
 
