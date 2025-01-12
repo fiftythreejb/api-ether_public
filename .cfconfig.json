@@ -1,5 +1,5 @@
 {
-    "name":"ether-api",
+    "name":"ether-api-public",
     "web":{
         "host":"127.0.0.1",
         "http":{

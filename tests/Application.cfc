@@ -30,7 +30,8 @@ component {
 	this.mappings[ "/coldbox" ] = rootPath & "coldbox";
 	this.mappings[ "/testbox" ] = rootPath & "testbox";
 
-	// this.datasource = "apiDb";
+	this.datasource = "apiDb";
+	this.dsn = "apiDb";
 
 	/**
 	 * Fires on every test request. It builds a Virtual ColdBox application for you

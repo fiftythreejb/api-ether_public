@@ -13,7 +13,7 @@ component extends="coldbox.system.RestHandler" accessors="true" {
 	/**
 	 * Return the collection of modTemplate
 	 */
-	function index(event, rc, prc){
+	function index(event, rc, prc) {
 		arguments.event.paramValue("page", 1);
 		arguments.event.paramValue("maxRows", 10);
 

@@ -7,6 +7,7 @@ WEB-INF
 .cflintrc
 .markdownlint.json
 .editorconfig
+/_devNotes
 
 # Engines + Database + CBFS + Secrets
 .env

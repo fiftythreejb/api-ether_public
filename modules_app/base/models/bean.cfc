@@ -1,5 +1,10 @@
 component output="false" displayname="base.bean" accessors="true"  {
 	
+	this.memento = {
+		// An array of the properties/relationships to include by default
+		defaultIncludes = ["*"]
+	};
+
 	/**
 	* @displayname  getPrimaryKey
 	* @description  I return the primary key of the bean that extends this bean

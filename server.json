@@ -1,5 +1,5 @@
 {
-    "name":"ether-api",
+    "name":"ether-api-public",
     "web":{
         "rewrites":{
             "enable":true

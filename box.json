@@ -1,9 +1,9 @@
 {
-    "name":"etherApi",
+    "name":"etherApiPublic",
     "version":"1.0.0",
     "location":"",
     "author":"You",
-    "slug":"etherapi",
+    "slug":"etherapipublic",
     "createPackageDirectory":false,
     "type":"mvc",
     "homepage":"https://github.com/coldbox-templates/rest",

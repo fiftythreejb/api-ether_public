@@ -123,6 +123,54 @@ component singleton accessors="true" extends="base.models.dao" displayname="ModT
 		);
 	}
 
+
+  /**
+	 * list records
+   	 * I run a filtered query of all records within the [table name] table in the database
+   	 *
+	 * @returnColumns string	(optional) A list of the columns
+	 * @exchangeId numeric		(optional) Identity of the table record 
+	 *
+	 * @return query
+	 */
+	package query function filter(
+		numeric id,
+		boolean isActive,
+		string groupBy,
+		string orderBy,
+		boolean pagination = false,
+		numeric start,
+		numeric length
+	) {
+
+		// TODO: BEGIN TESTING - REMOVE WHEN UPDATING FROM TEMPLATE
+		var dummyQuery = queryNew("id, title",
+			"integer, varchar",
+			[
+				{"id":1,"title":"This is mock template data."},
+				{"id":2,"title":"Seriously, Don't leave this here!"},
+				{"id":3,"title":"I'm giving you a choice: either put on these glasses or start eatin' that trash can."},
+				{"id":4,"title":"I have come here to chew bubblegum and kick ass… and I’m all out of bubblegum."}
+			]
+		);
+		return dummyQuery;
+		// END TESTING
+
+		return queryExecute( "
+				SELECT *
+				FROM modTemplate
+				WHERE id = :id
+			",
+			{
+				id = { cfsqltype = "integer", value = arguments.Id }
+			},
+			{
+				datasource = getDsn()
+			}
+		);
+	}
+
+
 	/**
 	 * I check if a record exists in the [modTemplate] table
 	 *
