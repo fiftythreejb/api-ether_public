@@ -33,6 +33,7 @@ component displayname="base.service" accessors="true" singleton {
 	 * @referenceBean any						 The bean (by reference)
 	 */
 	public void function remove( required any referenceBean ) {
+
 		getDao().delete( argumentCollection = arguments );
 
 	}

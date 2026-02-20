@@ -5,8 +5,6 @@ component singleton accessors="true" extends="base.models.service" displayname="
 
 	// Properties
 	property name="dao" lazy; // coldbox lazy load of dao
-	// DI
-	property name="bean" inject="ModTemplateBean@modTemplate";
 
 /************************
 	PUBLIC
@@ -31,12 +29,10 @@ component singleton accessors="true" extends="base.models.service" displayname="
 	 * I return an ModTemplate bean
 	 *
 	 * @return modTemplate.models.ModTemplateBean
- 
 	 */
-	 public modTemplate.models.ModTemplateBean function getBean() {
-		 return new modTemplate.models.ModTemplateBean();
-	 }
-
+	public modTemplate.models.ModTemplateBean function getBean() {
+		return new modTemplate.models.ModTemplateBean();
+	}
 
 	/**
 	 * list records
@@ -48,11 +44,16 @@ component singleton accessors="true" extends="base.models.service" displayname="
 	 * @return query
 	 */
 	public query function filter(
-		numeric id,
-		boolean isActive,
+		string returnColumns = "list, of, columns",
 		boolean cache = true,
 		boolean clearCache = false,
 		string cacheTime = '60',
+		numeric id,
+		date createdOn,
+		date updatedOn,
+		boolean isActive,
+		string groupBy,
+		string orderBy,
 		boolean pagination = false,
 		numeric start,
 		numeric length

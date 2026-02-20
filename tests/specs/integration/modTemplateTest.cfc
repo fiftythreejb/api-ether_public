@@ -67,10 +67,9 @@ component extends="coldbox.system.testing.BaseTestCase" accessors="true" autowir
 
 			it("Run index: list items", function(){
                 // Execute event or route via GET http method. Spice up accordingly
-				var event = this.get(route = "api/modTemplate/", params = {});
+				var event = get(event = "modTemplate:modTemplate.index", params = {});
 				var response = event.getPrivateValue( "Response" );
 				var repData = response.getData();
-
 				// expectations go here.
 				expect(response.getStatusCode()).toBe(200, response.getMessages().toString());
 				expect(response.getError()).toBeFalse(response.getMessages().toString());

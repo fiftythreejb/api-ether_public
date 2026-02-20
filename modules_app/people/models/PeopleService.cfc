@@ -50,6 +50,39 @@ component displayname="PeopleService" accessors="true" extends="base.models.serv
 		return hash(arguments.salt & arguments.password & pepper, "SHA-512", "utf-8");
 	}
 
+/************************
+	PACKAGE
+************************/
+	/**
+	 * I run a filtered query of all records within the parked order in the database
+	 *
+	 * @returnColumns string 				A list of the columns
+	 * @id numeric					The primary key for the person record
+	 * @email string						person email
+	 * @email firstName						person first name
+	 * @email lastName						person last name
+	 * @isActive boolean					Is the parked record active
+	 *
+	 * @return query
+	 */
+	package query function filter(
+		string returnColumns = "id,d_email,d_first_name,d_last_name,d_is_active",
+		numeric id,
+		string email,
+		string firstName,
+		string lastName,
+		boolean isActive
+	) {
+		return getDao().filter(
+			returnColumns = arguments.returnColumns,
+			id = arguments.id,
+			email  = arguments.email ,
+			firstName = arguments.firstName,
+			lastName = arguments.lastName,
+			isActive = arguments.isActive
+		);
+	}
+
 /****************
 	Private
 ****************/

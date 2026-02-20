@@ -28,6 +28,7 @@ yarn-error.log
 /testbox/**
 /modules/**
 logs/
+/resources/apidocs
 
 ## Templates
 # /modules_app/modTemplate

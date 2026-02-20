@@ -11,6 +11,8 @@ component extends="coldbox.system.RestHandler" {
 	 *
 	 * @username 	-string  user for authentication
 	 * @password 	-string  password for authentication
+	 * @x           -route          (POST) /api/login
+	 * @requestBody ~auth/login/requestBody.json
 	 * @response    -default ~auth/login/responses.json##200
 	 * @response    -401     ~auth/login/responses.json##401
 	 */

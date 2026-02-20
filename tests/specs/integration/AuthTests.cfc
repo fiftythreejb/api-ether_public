@@ -2,7 +2,7 @@ component extends="coldbox.system.testing.BaseTestCase" autowire accessors="true
 
 	property name="jwtService" inject="provider:JwtService@cbsecurity";
 	property name="cbauth"     inject="provider:authenticationService@cbauth";
-	property name="dsn" inject="coldbox:configSettings:dsn";
+	property name="dsn" inject="coldbox:configSettings:datasource";
 
 	/*********************************** LIFE CYCLE Methods ***********************************/
 

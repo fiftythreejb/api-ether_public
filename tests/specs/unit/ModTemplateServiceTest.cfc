@@ -3,23 +3,25 @@
 * and then create it, prepare it for mocking and then place it in the variables scope as 'model'. It is your
 * responsibility to update the model annotation instantiation path and init your model.
 */
-component extends="coldbox.system.testing.BaseTestCase" model="modTemplate.models.ModTemplateService"{
+component extends="coldbox.system.testing.BaseModelTest" model="modTemplate.models.ModTemplateService"{
 
 	/*********************************** LIFE CYCLE Methods ***********************************/
 
 	function beforeAll(){
 		super.beforeAll();
-		// prepare model for mocking
-		variables.model = prepareMock(getInstance('modTemplate.models.ModTemplateService'));
 
 		// setup the model
-		setup();		
+		super.setup();
+
+		// init the model object
+		model.init();
+
+		// prepare model for mocking
+		prepareMock(model);
 
 		// mock properties
-		// variables.dao = createMock(className = 'modTemplate.models.ModTemplateDao');
-		variables.dao = prepareMock(getInstance( "modTemplate.models.ModTemplateDao" ));
-
-		variables.model.$property(propertyName = 'Dao', mock = variables.dao);
+		variables.dao = createMock(className = 'modTemplate.models.ModTemplateDao');
+		model.$property(propertyName = 'Dao', mock = dao);
 	}
 
 	function afterAll(){
@@ -33,7 +35,6 @@ component extends="coldbox.system.testing.BaseTestCase" model="modTemplate.model
 		describe( "ModTemplateService Suite", function(){
 
 			it( "can be created", function(){
-				// debug(model.getBean());
 				expect( model ).toBeComponent();
 			} );
 
@@ -50,7 +51,7 @@ component extends="coldbox.system.testing.BaseTestCase" model="modTemplate.model
 				dao.$(method = 'update');
 				dao.$(method = 'create');
 				dao.$(method = 'exists').$results(true);
-				var bean = model.getBean();
+				var bean = getInstance('modTemplate.models.ModTemplateBean');
 				
 				// can update
 				bean.setId(1);
@@ -91,7 +92,7 @@ component extends="coldbox.system.testing.BaseTestCase" model="modTemplate.model
 
 			it( "should get", function(){
 				dao.$(method = 'read');
-				var bean = model.getBean();
+				var bean = getInstance('modTemplate.models.ModTemplateBean');
 				
 				// can read
 				bean.setId(1);

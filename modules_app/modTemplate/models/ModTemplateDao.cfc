@@ -123,7 +123,6 @@ component singleton accessors="true" extends="base.models.dao" displayname="ModT
 		);
 	}
 
-
   /**
 	 * list records
    	 * I run a filtered query of all records within the [table name] table in the database
@@ -134,7 +133,10 @@ component singleton accessors="true" extends="base.models.dao" displayname="ModT
 	 * @return query
 	 */
 	package query function filter(
+		string returnColumns = "list, of, columns",
 		numeric id,
+		date createdOn,
+		date updatedOn,
 		boolean isActive,
 		string groupBy,
 		string orderBy,
@@ -156,20 +158,45 @@ component singleton accessors="true" extends="base.models.dao" displayname="ModT
 		return dummyQuery;
 		// END TESTING
 
-		return queryExecute( "
-				SELECT *
-				FROM modTemplate
-				WHERE id = :id
-			",
-			{
-				id = { cfsqltype = "integer", value = arguments.Id }
-			},
-			{
-				datasource = getDsn()
-			}
-		);
-	}
+		var sql = "SELECT #arguments.returnColumns# FROM modTemplate WHERE 1 = 1 ";
+		var params = {};
+		var options = { datasource = getDsn() };
 
+		if( structKeyExists( arguments, "id" ) ) {
+			sql &= "AND id = :id ";
+			params["id"] = {cfsqltype="numeric", value="#arguments.id#"};
+		}
+
+		if( structKeyExists( arguments, "createdOn" ) ) {
+			sql &= "AND createdOn = :createdOn ";
+			params["createdOn"] = { cfsqltype="timestamp", value="#arguments.createdOn#" };
+		}
+
+		if( structKeyExists( arguments, "updatedOn" ) ) {
+			sql &= "AND updatedOn = :updatedOn ";
+			params["updatedOn"] = { cfsqltype="timestamp", value="#arguments.updatedOn#" };
+		}
+
+		if( structKeyExists( arguments, "isActive" ) AND ListFind("0,1", arguments.isActive) ) {
+			sql &= "AND isActive = :isActive ";
+			params["isActive"] = { cfsqltype="bit", value="#arguments.isActive#" };
+		}
+
+		if( structKeyExists( arguments, "groupBy" ) && len(arguments.groupBy) ) {
+			sql &= "GROUP BY #arguments.groupBy# ";
+		}
+
+		if( structKeyExists( arguments, "orderBy" ) && len(arguments.orderBy)) {
+			sql &= "ORDER BY #arguments.orderBy# ";
+		}
+
+		if( structKeyExists( arguments, "pagination" ) AND arguments.pagination ) {
+			sql &= "LIMIT #arguments.length# OFFSET #arguments.start#;";
+		}
+
+		// execute the query and return results
+		return queryExecute( sql, params, options );
+	}
 
 	/**
 	 * I check if a record exists in the [modTemplate] table

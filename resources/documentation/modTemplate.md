@@ -173,6 +173,16 @@ This will hold our object data and house methods for manipulating or transformin
 
 - getting primary key
 
+- get memento
+
+- get memento as json
+
+- populate bean from data struct
+
+- get meta data
+
+- hashing and getting primary key
+
 #### Dao
 
 This is our data layer. An interface for a data source table or set of API endpoints. This will make our SQL calls or calls to external API endpoints and format the data for our service to serve to our handler endpoint.
@@ -225,6 +235,8 @@ The base service that this will extend provides the basic interface needed for i
   - This will delete the record related to the passed in bean
 - save
   - This will either update or insert the data based on the passed in bean
+- setCachedData
+  - This will cache the data called from the data source based on the arguments passed and time period specified. 60 minutes is the default.
 
 Our template service includes additional methods that can be used to interface with your DAO.
 
